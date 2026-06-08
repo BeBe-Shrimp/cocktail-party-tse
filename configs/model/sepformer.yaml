@@ -1,0 +1,16 @@
+# SepFormer: Transformer-based separation network
+# Uses dual-path transformers instead of dilated convolutions.
+
+defaults:
+  - auditory_tse
+
+model:
+  encoder_channels: 512
+  separation_type: sepformer
+  sepformer_embed_dim: 256
+  sepformer_num_heads: 8
+  sepformer_ffn_dim: 1024
+  sepformer_num_layers: 2
+  sepformer_chunk_size: 250
+  sepformer_dropout: 0.1
+  speaker_embedding_dim: 256

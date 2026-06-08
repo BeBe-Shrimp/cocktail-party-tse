@@ -1,0 +1,13 @@
+# Conv-TasNet baseline for speech separation (no speaker conditioning)
+# This is a standard Conv-TasNet for comparison.
+
+defaults:
+  - auditory_tse
+
+model:
+  encoder_channels: 512
+  bottleneck_channels: 256
+  num_tcn_blocks: 8
+  tcn_repeats: 3
+  separation_type: conv_tasnet
+  speaker_embedding_dim: 256

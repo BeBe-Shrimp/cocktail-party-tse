@@ -1,0 +1,8 @@
+# Default inference configuration
+
+inference:
+  checkpoint_path: ./checkpoints/best.ckpt
+  sample_rate: 16000
+  chunk_duration_seconds: 10.0
+  overlap_seconds: 1.0
+  device: auto                 # "auto", "cuda", or "cpu"

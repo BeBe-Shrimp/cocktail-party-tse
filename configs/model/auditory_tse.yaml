@@ -1,0 +1,39 @@
+# Auditory-TSE: Auditory-inspired Target Speaker Extraction
+# This is the default model configuration.
+
+model:
+  # Encoder (Auditory Frontend)
+  encoder_kernel_size: 16         # samples at 16kHz (~1ms)
+  encoder_stride: 8               # 50% overlap
+  encoder_channels: 512           # feature dimension (N in Conv-TasNet paper)
+  use_dual_path_encoder: false    # set true for Gammatone + learned dual pathway
+
+  # Speaker Encoder (ECAPA-TDNN)
+  speaker_encoder_channels: 512
+  speaker_embedding_dim: 256      # d-vector dimension
+
+  # Separation Network
+  separation_type: conv_tasnet    # "conv_tasnet" | "sepformer" | "cross_attn"
+
+  # Conv-TasNet specific (used when separation_type == "conv_tasnet")
+  bottleneck_channels: 256        # TCN bottleneck (B in the paper)
+  num_tcn_blocks: 8               # blocks per repeat (X)
+  tcn_repeats: 3                  # repeats (R)
+  tcn_kernel_size: 3              # depthwise conv kernel size
+  causal: false                   # causal convolutions for streaming
+
+  # SepFormer specific (used when separation_type == "sepformer")
+  sepformer_embed_dim: 256
+  sepformer_num_heads: 8
+  sepformer_ffn_dim: 1024
+  sepformer_num_layers: 2
+  sepformer_chunk_size: 250
+  sepformer_dropout: 0.1
+
+  # Cross-Attention specific (used when separation_type == "cross_attn")
+  cross_attn_num_heads: 8
+  cross_attn_num_layers: 4
+  cross_attn_dropout: 0.1
+
+  # General
+  sample_rate: 16000

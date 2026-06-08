@@ -1,0 +1,24 @@
+# Auditory-TSE Main Configuration
+# Uses Hydra's hierarchical config system: defaults + overrides
+
+defaults:
+  - model: auditory_tse
+  - data: librimix
+  - training: default
+  - _self_
+
+# General settings
+seed: 42
+output_dir: ./outputs
+experiment_name: auditory_tse_experiment
+
+# Logging
+log_level: INFO
+use_tensorboard: true
+
+# Hydra output settings
+hydra:
+  run:
+    dir: ${output_dir}/${experiment_name}/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: ${output_dir}/multirun/${experiment_name}/${now:%Y-%m-%d_%H-%M-%S}
