@@ -37,6 +37,7 @@ from src.models.auditory_tse import AuditoryTSE
 from src.data.dataset import TSEDataset
 from src.data.librimix import LibriMixDataset
 from src.data.wham import WHAMDataset
+from src.data.custom_tse import CustomTSEDataset
 from src.data.collate import Collator
 from src.training.trainer import Trainer
 
@@ -123,6 +124,7 @@ def create_dataloaders(cfg: DictConfig) -> tuple:
     dataset_class = {
         "librimix": LibriMixDataset,
         "wham": WHAMDataset,
+        "custom_tse": CustomTSEDataset,
     }.get(data_cfg.name)
 
     if dataset_class is None:

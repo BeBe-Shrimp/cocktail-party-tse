@@ -9,6 +9,7 @@ Handles:
 - Progress display via tqdm
 """
 
+import contextlib
 import logging
 import time
 from pathlib import Path
@@ -289,7 +290,7 @@ class Trainer:
         audio_mask = batch.get("audio_mask")
 
         # Mixed precision forward
-        with torch.amp.autocast("cuda") if self.use_amp else torch.no_grad():
+        with torch.amp.autocast("cuda") if self.use_amp else contextlib.nullcontext():
             output = self.model(mixture, enrollment)
             estimated = output["waveform"].squeeze(1)  # (B, T)
 
@@ -329,7 +330,7 @@ class Trainer:
             target = batch["target"].to(self.device, non_blocking=True)
             audio_mask = batch.get("audio_mask")
 
-            with torch.amp.autocast("cuda") if self.use_amp else torch.no_grad():
+            with torch.amp.autocast("cuda") if self.use_amp else contextlib.nullcontext():
                 output = self.model(mixture, enrollment)
                 estimated = output["waveform"].squeeze(1)
 
